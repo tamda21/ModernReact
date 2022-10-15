@@ -8,7 +8,10 @@ let Home = ()=>{
     ]);
   return (
     <div className='container'>
-       <Info info={info} title="All Info"/>
+       <Info info={info} title="All Info!"/>
+       <Info info={info.filter(inf=>{
+         return inf.name==='Abde'||inf.name==='Meryem'
+       })} title="Info Perants !"/>
     </div>
     )
 }
