@@ -6,8 +6,9 @@ let [isPending,setisPending] = useState(true);
 let[error,setError] = useState(null);
 useEffect(()=>{
       /* setTimeout just for testing your server connection*/
+      let abortCont = new AbortController();
       setTimeout(function() {
-fetch(url).then(res=>{
+fetch(url,{singal:abortCont.singal}).then(res=>{
   if(!res.ok){
    throw Error('could not fetch data for this recource :(');
   }
@@ -17,10 +18,18 @@ fetch(url).then(res=>{
         setisPending(false);
         setError(null);
       }).catch(err=>{
+        if (err.name==="AbortError") {
+          console.log('Fetch Aborted');
+        } else {
         setisPending(false);
         setError(err.message);
+        }
       });
-      }, 2000);
+      },1000);
+      return ()=>{
+        abortCont.abort();
+        
+      }
       },[url]);
   return {info,isPending,error};
 };

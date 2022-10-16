@@ -14,9 +14,9 @@ let Home = ()=>{
     }*/}
     let {info,isPending,error} = useFetch('http://localhost:8000/info');
   return (
-    <div className='container'>
-    {error && <div class="red-text">{error}</div>}
-    {isPending && <div class="progress">Loading... <div class="indeterminate blue-grey darken-3"></div> </div>}
+    <div className ='container'>
+    {error && <div className ="red-text">{error}</div>}
+    {isPending && <div className ="progress">Loading... <div className ="indeterminate blue-grey darken-3"></div> </div>}
      { info && <Info info={info} title="All Info!"/>}
        {/*<Info info={info.filter(inf=>{
          return inf.name==='Abde'||inf.name==='Meryem'
